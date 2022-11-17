@@ -8,12 +8,12 @@ import PlaceIcon from "@mui/icons-material/Place";
 import LanguageIcon from "@mui/icons-material/Language";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Posts from "../../component/posts/Posts"
+import Posts from "../../component/posts/Posts";
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 
 const Profile = () => {
-  const {currentUser} = useContext(AuthContext)
+  const { currentUser } = useContext(AuthContext);
   return (
     <div className="profile">
       <div className="images">
@@ -28,19 +28,19 @@ const Profile = () => {
         <div className="uInfo">
           <div className="left">
             <a href="http://facebook.com">
-              <FacebookTwoToneIcon fontSize="small" />
+              <FacebookTwoToneIcon fontSize="large" />
             </a>
             <a href="http://facebook.com">
-              <InstagramIcon fontSize="small" />
+              <InstagramIcon fontSize="large" />
             </a>
             <a href="http://facebook.com">
-              <TwitterIcon fontSize="small" />
+              <TwitterIcon fontSize="large" />
             </a>
             <a href="http://facebook.com">
-              <LinkedInIcon fontSize="small" />
+              <LinkedInIcon fontSize="large" />
             </a>
             <a href="http://facebook.com">
-              <PinterestIcon fontSize="small" />
+              <PinterestIcon fontSize="large" />
             </a>
           </div>
           <div className="center">
