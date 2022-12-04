@@ -1,7 +1,10 @@
 import "./rightBar.scss";
 import Me from "../../assets/me.jpg";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 const RightBar = () => {
+  const { currentUser } = useContext(AuthContext);
   
   return (
     <div className="rightBar">
@@ -11,10 +14,10 @@ const RightBar = () => {
           <div className="user">
             <div className="userInfo">
               <img
-                src={Me}
+                src={"/upload/" + currentUser.profilePic}
                 alt="profile-img"
               />
-              <span>Mohamed Nasr</span>
+              <span>{currentUser.name}</span>
             </div>
             <div className="buttons">
               <button>follow</button>
@@ -23,10 +26,7 @@ const RightBar = () => {
           </div>
           <div className="user">
             <div className="userInfo">
-              <img
-                src={Me}
-                alt="profile-img"
-              />
+              <img src={Me} alt="profile-img" />
               <span>Mohamed Nasr</span>
             </div>
             <div className="buttons">
@@ -39,10 +39,7 @@ const RightBar = () => {
           <span>Latest Activities</span>
           <div className="user">
             <div className="userInfo">
-              <img
-                src={Me}
-                alt="profile-img"
-              />
+              <img src={Me} alt="profile-img" />
               <p>
                 <span>Mohamed Nasr</span> changed his cover picture
               </p>
@@ -51,10 +48,7 @@ const RightBar = () => {
           </div>
           <div className="user">
             <div className="userInfo">
-              <img
-                src={Me}
-                alt="profile-img"
-              />
+              <img src={Me} alt="profile-img" />
               <p>
                 <span>Mohamed Nasr</span> has been mentioned
               </p>
@@ -63,10 +57,7 @@ const RightBar = () => {
           </div>
           <div className="user">
             <div className="userInfo">
-              <img
-                src={Me}
-                alt="profile-img"
-              />
+              <img src={Me} alt="profile-img" />
               <p>
                 <span>Mohamed Nasr</span> shared a post
               </p>
@@ -75,10 +66,7 @@ const RightBar = () => {
           </div>
           <div className="user">
             <div className="userInfo">
-              <img
-                src={Me}
-                alt="profile-img"
-              />
+              <img src={Me} alt="profile-img" />
               <p>
                 <span>Mohamed Nasr</span> updated his status
               </p>
@@ -90,40 +78,28 @@ const RightBar = () => {
           <span>Online friends</span>
           <div className="user">
             <div className="userInfo">
-              <img
-                src={Me}
-                alt="profile-img"
-              />
+              <img src={Me} alt="profile-img" />
               <div className="online" />
               <span>Mohamed Nasr</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img
-                src={Me}
-                alt="profile-img"
-              />
+              <img src={Me} alt="profile-img" />
               <div className="online" />
               <span>Mohamed Nasr</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img
-                src={Me}
-                alt="profile-img"
-              />
+              <img src={Me} alt="profile-img" />
               <div className="online" />
               <span>Mohamed Nasr</span>
             </div>
           </div>
           <div className="user">
             <div className="userInfo">
-              <img
-                src={Me}
-                alt="profile-img"
-              />
+              <img src={Me} alt="profile-img" />
               <div className="online" />
               <span>Mohamed Nasr</span>
             </div>

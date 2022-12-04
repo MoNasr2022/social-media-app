@@ -1,13 +1,15 @@
-import mysqle from "mysql";
+
 import express from "express";
-import cors from "cors";
-import {  } from "../controllers/post.js";
+
+import { getPosts, addPost, deletePost } from "../controllers/post.js";
 
 const router = express.Router();
 
-router.use(express.json());
-router.use(cors());
 
-router.get("", );
+
+router.get("/", getPosts);
+router.post("/", addPost);
+router.delete("/", deletePost);
+
 
 export default router;

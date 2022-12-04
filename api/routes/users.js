@@ -1,16 +1,16 @@
 import mysqle from "mysql";
 import express from "express";
 import cors from "cors";
-import  {getUser}  from "../controllers/user.js";
+import { getUser, updateUser } from "../controllers/user.js";
 
 
 const router = express.Router();
 
-//middlewares
-router.use(express.json());
-router.use(cors());
+
+
 
 router.get('/find/:userId', getUser)
+router.put('/', updateUser)
 
 
 export default router

@@ -11,7 +11,7 @@ export const register = (req, res) => {
         error: "User already exists",
       });
 
-    // CREATE NEW USER
+    
     //Hash the password
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(req.body.password, salt);

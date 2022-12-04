@@ -1,13 +1,13 @@
 import "./login.scss";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
-  const [err, setErr] = useState(false);
-  
+  const [err, setErr] = useState(null);
+  const navigate = useNavigate()
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -16,12 +16,15 @@ const Login = () => {
     e.preventDefault()
     try {
       await login(inputs);
+      navigate("/");
     } catch (err) {
-      setErr(true)
+      setErr(err.response.data)
+      console.log(err.response.data);
+      setInputs({})
     }
     
   };
-
+  
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -30,7 +33,7 @@ const Login = () => {
     <div className="login">
       <div className="card">
         <div className="left">
-          <h1>Hello World.</h1>
+          <h1>Everyone Social.</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam
             excepturi magni consectetur ratione pariatur. Quidem?
@@ -55,7 +58,7 @@ const Login = () => {
               name="password"
               onChange={handleChange}
             />
-            
+            {err && err}
             <button onClick={loginHandler}>Login</button>
           </form>
         </div>

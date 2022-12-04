@@ -4,29 +4,71 @@ import TextsmsOutlinedIcon from "@mui/icons-material/TextsmsOutlined";
 import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
 import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import { Link } from "react-router-dom";
-
+import moment from "moment";
 import "./post.scss";
 import Comments from "../Comments/Comments";
-import {  useState } from "react";
+import { useState } from "react";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
+import { makeRequest } from "../../axios";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 const Post = ({ post }) => {
+  const { currentUser } = useContext(AuthContext);
   const [comment, setComment] = useState(false);
+  const [menu, setMenu] = useState(false);
 
+  const queryClient = useQueryClient();
 
   const showComments = () => {
-    setComment(!comment)
-  }
- 
+    setComment(!comment);
+  };
 
+  const { isLoading, data } = useQuery(["likes", post.id], () =>
+    makeRequest.get("/likes?postId=" + post.id).then((res) => {
+      return res.data;
+    })
+  );
 
-  //temporary
-  const liked = false;
+  const mutation = useMutation(
+    (liked) => {
+      if (liked) return makeRequest.delete("/likes?postId=" + post.id);
+      return makeRequest.post("/likes", { postId: post.id });
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries(["likes"]);
+      },
+    }
+  );
+  const handleClick = async (e) => {
+    e.preventDefault();
+    mutation.mutate(data?.includes(currentUser.id));
+  };
+
+  const deletMutation = useMutation(
+    (postId) => {
+      return makeRequest.delete("/posts?postId=" + postId);
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries(["posts"]);
+      },
+    }
+  );
+
+  const deletePost = () => {
+    deletMutation.mutate(post.id);
+  };
+
   return (
     <div className="post">
       <div className="container">
         <div className="user">
           <div className="userInfo">
-            <img src={post.profilePic} alt="" />
+            <img src={"/upload/" + post.profilePic} alt="" />
             <div className="details">
               <Link
                 to={`/profile/${post.userId}`}
@@ -34,19 +76,33 @@ const Post = ({ post }) => {
               >
                 <span className="name">{post.name}</span>
               </Link>
-              <span className="date">1 min ago</span>
+              <span className="date">{moment(post.createdAt).fromNow()}</span>
             </div>
           </div>
-          <MoreHorizOutlinedIcon />
+          <MoreHorizOutlinedIcon onClick={() => setMenu(!menu)} />
+          {menu && post.userId === currentUser.id && (
+            <button className="deletPost" onClick={deletePost}>
+              Delete
+            </button>
+          )}
         </div>
         <div className="content">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-          <img src={post.img} alt="" />
+          <p>{post.desc}</p>
+          <img src={"/upload/" + post.img} alt="" />
         </div>
         <div className="info">
           <div className="item">
-            {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
-            12 Likes
+            {isLoading ? (
+              "Loading"
+            ) : data?.includes(currentUser.id) ? (
+              <FavoriteOutlinedIcon
+                style={{ color: "red" }}
+                onClick={handleClick}
+              />
+            ) : (
+              <FavoriteBorderOutlinedIcon onClick={handleClick} />
+            )}
+            {data?.length} Likes
           </div>
           <div className="item" onClick={showComments}>
             <TextsmsOutlinedIcon />
@@ -57,7 +113,7 @@ const Post = ({ post }) => {
             Share
           </div>
         </div>
-        {comment && <Comments />}
+        {comment && <Comments postId={post.id} />}
       </div>
     </div>
   );

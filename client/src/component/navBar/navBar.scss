@@ -19,7 +19,7 @@
       align-items: center;
       gap: 30px;
 
-      .link{
+      .link {
         color: themed("textColor");
       }
       span {
@@ -51,6 +51,7 @@
       }
     }
     .right {
+      position: relative;
       display: flex;
       align-items: center;
       gap: 20px;
@@ -58,7 +59,18 @@
       @include mobile {
         display: none;
       }
-
+      button {
+        position: absolute;
+        border: none;
+        padding: 5px;
+        color: white;
+        cursor: pointer;
+        background-color: #f0544f;
+        border-radius: 3px;
+        cursor: pointer;
+        
+        top: 30px;
+      }
       .user {
         display: flex;
         align-items: center;

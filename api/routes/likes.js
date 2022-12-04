@@ -1,13 +1,14 @@
-import mysqle from "mysql";
+
 import express from "express";
-import cors from "cors";
-import {} from "../controllers/like.js";
+
+import { getLikes, addLike, deleteLike } from "../controllers/like.js";
 
 const router = express.Router();
 
-router.use(express.json());
-router.use(cors());
 
-router.get("");
+
+router.get("/", getLikes);
+router.post("/", addLike);
+router.delete("/", deleteLike);
 
 export default router;

@@ -6,7 +6,7 @@ import {login, register, logout} from "../controllers/auth.js";
 const router = express.Router();
 
 router.use(express.json());
-router.use(cors());
+
 
 router.post("/login", login);
 router.post("/register", register);

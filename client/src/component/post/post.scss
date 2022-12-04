@@ -15,6 +15,7 @@
       padding: 20px;
 
       .user {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -43,16 +44,28 @@
             }
           }
         }
+        .deletPost {
+          position: absolute;
+          border: none;
+          padding: 5px;
+          color: white;
+          cursor: pointer;
+          background-color: #f0544f;
+          border-radius: 3px;
+          cursor: pointer;
+          right: 0;
+          top: 30px;
+        }
       }
 
       .content {
         margin: 20px 0;
-        p {
-        }
+
         img {
           width: 100%;
           max-height: 500px;
           object-fit: cover;
+          scale: inherit;
           border-radius: 5px;
           overflow: hidden;
         }
