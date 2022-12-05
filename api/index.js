@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://everyone-social.herokuapp.com/",
   })
 );
 app.use(cookieParser());
@@ -48,6 +48,15 @@ app.use("/api/comments", commentRoutes);
 app.use("/api/likes", likeRoutes);
 app.use("/api/followers", followersRoutes);
 
-app.listen(8000, () => {
+//b2905b26811459:5ef1582f@us-cdbr-east-06.cleardb.net/heroku_9a1fd5d6b7ece82?reconnect=true
+
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
+});
+
+
+app.listen(process.env.PORT || 8000, () => {
   console.log("conected to the backend!");
 });

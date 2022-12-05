@@ -1,7 +1,7 @@
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import Brightness3OutlinedIcon from "@mui/icons-material/Brightness3Outlined";
 import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/Person2Outlined";
+
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -9,7 +9,7 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { DarkModeContext } from "../../context/DarkModeContext";
 
 import "./navBar.scss";
